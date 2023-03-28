@@ -1,0 +1,11 @@
+fs=400;%频率设置
+wp=2*pi*50/fs; 
+ws=2*pi*100/fs; 
+deltaw=ws-wp;
+N0=ceil(6.2*pi/deltaw);%ceil为向上取整函数
+w=hanning(N0);%汉宁窗，可以修改成任何一个窗口函数
+wc=0.5*(ws+wp)/pi;
+b=fir1(N0-1,wc,w);%生成滤波器
+stem(b);
+figure
+freqz(b,1);
